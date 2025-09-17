@@ -10,6 +10,34 @@ class Assignment2 extends StatefulWidget {
 class _Assignment2State extends State<Assignment2> {
   TextEditingController tcFirst_num = TextEditingController();
   TextEditingController tcsecond_num = TextEditingController();
+  String output = '';
+  int result = 0;
+  void clear() {
+    setState(() {
+      tcFirst_num.clear();
+      tcsecond_num.clear();
+      output = '';
+    });
+  }
+
+  void calculate() {
+    int? first = int.tryParse(tcFirst_num.text);
+    int? second = int.tryParse(tcsecond_num.text);
+    if (tcFirst_num.text.isNotEmpty &&
+        tcsecond_num.text.isNotEmpty &&
+        first != null &&
+        second != null) {
+      setState(() {
+        result = first + second;
+        output = 'Result = $result';
+      });
+    } else {
+      setState(() {
+        output = 'Incorrect input';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +71,7 @@ class _Assignment2State extends State<Assignment2> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: calculate,
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                   child: Text(
                     'Calculate',
@@ -52,14 +80,14 @@ class _Assignment2State extends State<Assignment2> {
                 ),
                 SizedBox(width: 10),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: clear,
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   child: Text('Clear', style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
             SizedBox(height: 20),
-            Text('result', style: TextStyle(color: Colors.red)),
+            Text(output, style: TextStyle(color: Colors.red)),
           ],
         ),
       ),
