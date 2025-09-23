@@ -16,7 +16,6 @@ class _Assignment2State extends State<Assignment2> {
       count -= 0.01;
       count = double.parse(count.toStringAsFixed(2));
       if (count <= 0) {
-        count = 0;
         timer.cancel();
       }
     });
