@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class Timer extends StatefulWidget {
-  const Timer({super.key});
+class CountdownTimer extends StatefulWidget {
+  const CountdownTimer({super.key});
 
   @override
-  State<Timer> createState() => _TimerState();
+  State<CountdownTimer> createState() => _CountdownTimerState();
 }
 
-class _TimerState extends State<Timer> {
-  String message = 'Start';
+class _CountdownTimerState extends State<CountdownTimer> {
+  int count = 5;
+
   @override
-  //start at app start b4 create ui
   void initState() {
-    // TODO: implement initState
     super.initState();
-    //dreate a coutdown timer
-    // Timer(Duration(seconds: 3), () {
-    //   setState(() {
-    //     message = 'stop';
-    //   });
-    // });
-    Future.delayed(Duration(seconds: 3), () {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        message = 'Stop';
+        if (count > 0) {
+          count--;
+        } else {
+          timer.cancel();
+        }
       });
     });
   }
@@ -34,7 +31,7 @@ class _TimerState extends State<Timer> {
       body: SafeArea(
         child: Align(
           alignment: Alignment.topCenter,
-          child: Text(message, style: TextStyle(fontSize: 30)),
+          child: Text('$count', style: const TextStyle(fontSize: 30)),
         ),
       ),
     );
