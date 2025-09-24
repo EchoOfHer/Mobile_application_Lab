@@ -22,7 +22,7 @@ class _Assignment2State extends State<Assignment2> {
   }
 
   void cllickcount() {
-    if (count != 0 && count != 1) {
+    if (count != 0 && count <= 1) {
       setState(() {
         click += 1;
       });
