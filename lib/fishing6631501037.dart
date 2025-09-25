@@ -125,6 +125,7 @@ class _FishingState extends State<Fishing> {
           children: [
             //worms
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Worms: ', style: TextStyle(fontSize: 20)),
                 createWorms(worms),
