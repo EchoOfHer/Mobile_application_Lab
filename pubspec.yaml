@@ -65,6 +65,11 @@ flutter:
     - assets/images/salad.jpg
     - assets/images/Notime.jpg
     - assets/images/white.webp
+    - assets/images/fish/fisherman.png
+    - assets/images/fish/anglerfish.png
+    - assets/images/fish/neon-tetra.png
+    - assets/images/fish/puffer-fish.png
+    - assets/images/fish/shark.png
 
 
 

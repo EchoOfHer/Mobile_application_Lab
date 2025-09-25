@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:lab_4aug/Lab-week6/Freestyle.dart';
-
-//'./Lab-week4/basic.dart';
+import 'fishing6631501037.dart';
 
 void main() {
-  runApp(MaterialApp(home: Freestyle(), debugShowCheckedModeBanner: false));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Fishing()));
 }
