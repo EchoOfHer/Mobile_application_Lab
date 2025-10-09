@@ -8,8 +8,36 @@ class CbSw extends StatefulWidget {
 }
 
 class _CbSwState extends State<CbSw> {
+  //state variable
+  bool cb = false;
+
+  //Method
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Checkbox(
+                  value: cb,
+                  onChanged: (bool? value) {
+                    // print(value!);
+                    setState(() {
+                      cb = value!;
+                    });
+                  },
+                ),
+                Text('Red'),
+                SizedBox(width: 20),
+                Text('Checkbox status: ${cb}'),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
