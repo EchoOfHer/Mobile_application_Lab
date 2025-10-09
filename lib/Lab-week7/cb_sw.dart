@@ -12,6 +12,12 @@ class _CbSwState extends State<CbSw> {
   bool cb = false;
 
   //Method
+  void updateCB(bool? value) {
+    // print(value!);
+    setState(() {
+      cb = value!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +27,7 @@ class _CbSwState extends State<CbSw> {
           children: [
             Row(
               children: [
-                Checkbox(
-                  value: cb,
-                  onChanged: (bool? value) {
-                    // print(value!);
-                    setState(() {
-                      cb = value!;
-                    });
-                  },
-                ),
+                Checkbox(value: cb, onChanged: updateCB),
                 Text('Red'),
                 SizedBox(width: 20),
                 Text('Checkbox status: ${cb}'),
