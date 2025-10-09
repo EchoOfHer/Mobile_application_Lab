@@ -10,12 +10,21 @@ class CbSw extends StatefulWidget {
 class _CbSwState extends State<CbSw> {
   //state variable
   bool cb = false;
+  bool sw = false;
 
-  //Method
+  //Method to update checkbox
   void updateCB(bool? value) {
     // print(value!);
     setState(() {
       cb = value!;
+    });
+  }
+
+  //Method to update switch
+  void updateSw(bool? value) {
+    // print(value!);
+    setState(() {
+      sw = value!;
     });
   }
 
@@ -31,6 +40,14 @@ class _CbSwState extends State<CbSw> {
                 Text('Red'),
                 SizedBox(width: 20),
                 Text('Checkbox status: ${cb}'),
+              ],
+            ),
+            Row(
+              children: [
+                Switch(value: sw, onChanged: updateSw),
+                Text('Red'),
+                SizedBox(width: 20),
+                Text('Checkbox status: ${sw}'),
               ],
             ),
           ],
