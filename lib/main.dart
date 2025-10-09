@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lab_4aug/Lab-week7/DatePicker.dart';
+import 'package:lab_4aug/Lab-week7/Assignment1.dart';
 
 void main() {
-  runApp(MaterialApp(home: Datepicker(), debugShowCheckedModeBanner: false));
+  runApp(MaterialApp(home: Assignment1(), debugShowCheckedModeBanner: false));
 }
