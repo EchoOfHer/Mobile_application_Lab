@@ -1,3 +1,6 @@
+import 'dart:ffi';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class Assignment2 extends StatefulWidget {
@@ -12,6 +15,60 @@ class _Assignment2State extends State<Assignment2> {
   double sugarSlider = 1;
   String sugar = '';
   String type = '';
+  String image = '';
+  String SelectedCoff = '';
+  int price = 0;
+  int gValue = 0;
+
+  var coffee = [
+    {
+      'name': 'Latte',
+      'price': 35,
+      'image':
+          'https://coffeeclub.com.au/cdn/shop/files/2024_MAY_MENU_1200x1200px7.jpg?v=1716963237',
+    },
+    {
+      'name': 'Americano',
+      'price': 30,
+      'image':
+          'https://emilylaurae.com/wp-content/uploads/2022/09/iced-americano-6.jpg',
+    },
+    {
+      'name': 'Cappuccino',
+      'price': 40,
+      'image':
+          "https://dairyfarmersofcanada.ca/sites/default/files/image_file_browser/conso_recipe/2022/Capuccino.jpg",
+    },
+  ];
+  Widget coffeeWidget() {
+    List<Widget> coffeeRadio = [];
+    for (int i = 0; i < coffee.length; i++) {
+      coffeeRadio.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start, // Align to the left
+          children: [
+            Radio<int>(
+              value: i,
+              groupValue: gValue,
+              onChanged: changeRadio,
+              visualDensity:
+                  VisualDensity.compact, // Reduce radio button padding
+            ),
+            Text(
+              '${coffee[i]['name']} ${coffee[i]['price']}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(width: 10), // Spacing between radio and text
+          ],
+        ),
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start, // Align rows to the left
+      children: coffeeRadio,
+    );
+  }
+
   void sugarLev(value) {
     setState(() {
       sugarSlider = value;
@@ -24,10 +81,32 @@ class _Assignment2State extends State<Assignment2> {
     });
   }
 
+  void changeRadio(int? value) {
+    //value is a radio button's value
+    //whenever value matches groupValue, radio is selected
+    setState(() {
+      gValue = value!;
+    });
+  }
+
   void ordering() {
     setState(() {
       //type
       type = (swType != true) ? 'Hot' : 'Cold';
+      //price
+      dynamic priceVal = coffee[gValue]['price'];
+      if (priceVal is int) {
+        // price = priceVal;
+        price = (type == 'Hot') ? priceVal : priceVal + 5;
+      } else {
+        price = int.tryParse(priceVal) ?? 0;
+      }
+
+      //coffee
+      SelectedCoff = coffee[gValue]['name'] as String;
+      //picture
+      image = coffee[gValue]['image'] as String;
+
       //sugar level
       sugar = (sugarSlider == 0)
           ? 'no'
@@ -35,6 +114,7 @@ class _Assignment2State extends State<Assignment2> {
           ? 'normal'
           : 'less';
     });
+
     showAlert(context);
   }
 
@@ -44,7 +124,16 @@ class _Assignment2State extends State<Assignment2> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Your order'),
-          content: Text('${type} coffee with ${sugar} sugar'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.network(image),
+              SizedBox(height: 20),
+              Text(
+                '${type} $SelectedCoff with ${sugar} sugar. Price = $price bath',
+              ),
+            ],
+          ),
         );
       },
     );
@@ -67,22 +156,38 @@ class _Assignment2State extends State<Assignment2> {
                 child: Text('Your order', style: TextStyle(fontSize: 30)),
               ),
             ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Coffee',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            coffeeWidget(),
             Row(
               children: [
-                Text('Type', style: TextStyle(fontSize: 16)),
+                Text(
+                  'Type',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
                 Spacer(),
                 Text('Hot', style: TextStyle(fontSize: 16)),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Switch(value: swType, onChanged: drinkingType),
                 ),
-                Text('Cold', style: TextStyle(fontSize: 16)),
+                Text('Cold(+5)', style: TextStyle(fontSize: 16)),
               ],
             ),
             SizedBox(height: 20),
             Row(
               children: [
-                Text('Sugar level', style: TextStyle(fontSize: 16)),
+                Text(
+                  'Sugar',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Spacer(),
+                Text('None', style: TextStyle(fontSize: 16)),
                 Slider(
                   value: sugarSlider,
                   divisions: 2,
