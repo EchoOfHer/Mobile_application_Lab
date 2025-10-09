@@ -50,7 +50,6 @@ class _Assignment1State extends State<Assignment1> {
     );
 
     if (pickedDate != null) {
-      // --- FIX: You must call setState to update the UI ---
       setState(() {
         dtT = pickedDate;
         dateT = '${dtT!.day}/${dtT!.month}/${dtT!.year}';
