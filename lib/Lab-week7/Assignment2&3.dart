@@ -12,11 +12,13 @@ class Assignment2 extends StatefulWidget {
 
 class _Assignment2State extends State<Assignment2> {
   bool swType = false;
+
   double sugarSlider = 1;
   String sugar = '';
   String type = '';
   String image = '';
   String SelectedCoff = '';
+  String status = "";
   int price = 0;
   int gValue = 0;
 
@@ -45,26 +47,25 @@ class _Assignment2State extends State<Assignment2> {
     for (int i = 0; i < coffee.length; i++) {
       coffeeRadio.add(
         Row(
-          mainAxisAlignment: MainAxisAlignment.start, // Align to the left
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Radio<int>(
               value: i,
               groupValue: gValue,
               onChanged: changeRadio,
-              visualDensity:
-                  VisualDensity.compact, // Reduce radio button padding
+              visualDensity: VisualDensity.compact,
             ),
             Text(
               '${coffee[i]['name']} ${coffee[i]['price']}',
               style: const TextStyle(fontSize: 16),
             ),
-            const SizedBox(width: 10), // Spacing between radio and text
+            const SizedBox(width: 10),
           ],
         ),
       );
     }
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start, // Align rows to the left
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: coffeeRadio,
     );
   }
@@ -82,8 +83,6 @@ class _Assignment2State extends State<Assignment2> {
   }
 
   void changeRadio(int? value) {
-    //value is a radio button's value
-    //whenever value matches groupValue, radio is selected
     setState(() {
       gValue = value!;
     });
@@ -91,6 +90,7 @@ class _Assignment2State extends State<Assignment2> {
 
   void ordering() {
     setState(() {
+      status = '';
       //type
       type = (swType != true) ? 'Hot' : 'Cold';
       //price
@@ -131,6 +131,26 @@ class _Assignment2State extends State<Assignment2> {
               SizedBox(height: 20),
               Text(
                 '${type} $SelectedCoff with ${sugar} sugar. Price = $price bath',
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancle'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      setState(() {
+                        status = 'Thank you for your order!';
+                      });
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
               ),
             ],
           ),
@@ -213,6 +233,8 @@ class _Assignment2State extends State<Assignment2> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
+            SizedBox(height: 20),
+            Text(status, style: TextStyle(color: Colors.red, fontSize: 20)),
           ],
         ),
       ),
