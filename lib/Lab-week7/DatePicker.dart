@@ -10,6 +10,7 @@ class Datepicker extends StatefulWidget {
 class _DatepickerState extends State<Datepicker> {
   String date = '';
   String time = '';
+  String stateAlert = '';
   void ShowCalendar() async {
     DateTime? dt = await showDatePicker(
       context: context,
@@ -40,6 +41,43 @@ class _DatepickerState extends State<Datepicker> {
     });
   }
 
+  void showAlert() async {
+    //return the future thing.
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Center(child: Text('Warning ')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.network(
+                'https://cdn-icons-png.flaticon.com/128/4201/4201973.png',
+              ),
+              Text('The item will be remove permanently'),
+            ],
+          ),
+
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                setState(() {
+                  stateAlert = 'U choose Got it';
+                });
+              },
+              child: Text('Got it !', style: TextStyle(color: Colors.red)),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Huh ?', style: TextStyle(color: Colors.green)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +97,13 @@ class _DatepickerState extends State<Datepicker> {
               icon: Icon(Icons.lock_clock),
               label: Text('Select'),
             ),
+            SizedBox(height: 20),
+            FilledButton(
+              onPressed: showAlert,
+              style: FilledButton.styleFrom(backgroundColor: Colors.red),
+              child: Text('Delete'),
+            ),
+            Text(stateAlert),
           ],
         ),
       ),
