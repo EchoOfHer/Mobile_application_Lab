@@ -13,7 +13,8 @@ class Page1 extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: FilledButton(
           onPressed: () {
-            // jump to Page2
+            // jump to Page2 without history
+            // Navigator.pushReplacement(
             Navigator.push(
               context,
               // MaterialPageRoute(

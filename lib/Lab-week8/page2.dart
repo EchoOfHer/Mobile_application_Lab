@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Fruit.dart';
+import 'Page1.dart';
 
 class Page2 extends StatelessWidget {
   Fruit fruit;
@@ -32,11 +33,27 @@ class Page2 extends StatelessWidget {
             Text('Price: ${fruit.price}'),
             Text('Dates: ${fruit.date.join(', ')}'), // Display list elements
             const SizedBox(height: 20),
-            FilledButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Back'), // Added const
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilledButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Back'), // Added const
+                ),
+                FilledButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      //remove history and go to the page we select
+                      MaterialPageRoute(builder: (context) => Page1()),
+                      (Route<dynamic> route) => false,
+                    );
+                  },
+                  child: const Text('Logout'), // Added const
+                ),
+              ],
             ),
           ],
         ),
