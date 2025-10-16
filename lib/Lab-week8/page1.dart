@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lab_4aug/Lab-week8/page2.dart';
+import 'Fruit.dart';
 
 class Page1 extends StatelessWidget {
   const Page1({super.key});
@@ -26,9 +27,14 @@ class Page1 extends StatelessWidget {
               //     },
               //   ),
               // ),
+              //----> Constructor
+              // MaterialPageRoute(
+              //   builder: (context) =>
+              //       Page2(name: 'apple', price: 15, date: ['10 Oct', '19 Oct']),
+              // ),
               MaterialPageRoute(
                 builder: (context) =>
-                    Page2(name: 'apple', price: 15, date: ['10 Oct', '19 Oct']),
+                    Page2(fruit: Fruit('apple', 30, ['10 Oct', '19 Oct'])),
               ),
             ); // Correctly pushes Page2 onto the stack
           },
