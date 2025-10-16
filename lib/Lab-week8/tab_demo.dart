@@ -16,7 +16,18 @@ class _TabDemoState extends State<TabDemo> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Tab demo'),
-          bottom: TabBar(
+
+          // bottom: TabBar(
+          //   tabs: [
+          //     Tab(icon: Icon(Icons.home), text: 'Home'),
+          //     Tab(icon: Icon(Icons.train), text: 'Train'),
+          //     Tab(icon: Icon(Icons.directions_bike_outlined), text: 'Bike'),
+          //   ],
+          // ),
+        ),
+        bottomNavigationBar: Container(
+          color: Colors.white,
+          child: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.home), text: 'Home'),
               Tab(icon: Icon(Icons.train), text: 'Train'),
