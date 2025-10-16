@@ -15,16 +15,20 @@ class Page1 extends StatelessWidget {
             // jump to Page2
             Navigator.push(
               context,
+              // MaterialPageRoute(
+              //   builder: (context) => Page2(),
+              //   settings: RouteSettings(
+              //     arguments: <String, dynamic>{
+              //       'name': 'apple',
+              //       'price': 15,
+              //       'date': ['10 Oct', '19 Oct'],
+              //       //or any variable
+              //     },
+              //   ),
+              // ),
               MaterialPageRoute(
-                builder: (context) => Page2(),
-                settings: RouteSettings(
-                  arguments: <String, dynamic>{
-                    'name': 'apple',
-                    'price': 15,
-                    'date': ['10 Oct', '19 Oct'],
-                    //or any variable
-                  },
-                ),
+                builder: (context) =>
+                    Page2(name: 'apple', price: 15, date: ['10 Oct', '19 Oct']),
               ),
             ); // Correctly pushes Page2 onto the stack
           },
